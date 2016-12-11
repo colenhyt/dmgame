@@ -82,12 +82,12 @@ $modelLabel = new \common\models\Game();
                 echo '<tr id="rowid_' . $model->game_id . '">';
                 echo '  <td><label><input type="checkbox" value="' . $model->game_id . '"></label></td>';
                 echo '  <td>' . $model->game_id . '</td>';
-                echo '  <td>' . $model->name . '</td>';
-                echo '  <td>' . $model->cdesc . '</td>';
-                echo '  <td>' . $model->icon . '</td>';
-                echo '  <td>' . $model->status . '</td>';
-                echo '  <td>' . $model->remark . '</td>';
-                echo '  <td>' . $model->createtime . '</td>';
+                echo '  <td id="name_'. $model->game_id.'">' . $model->name . '</td>';
+                echo '  <td id="cdesc_'. $model->game_id.'">' . $model->cdesc . '</td>';
+                echo '  <td id="icon_'. $model->game_id.'">' . $model->icon . '</td>';
+                echo '  <td id="status_'. $model->game_id.'">' . $model->status . '</td>';
+                echo '  <td id="remark_'. $model->game_id.'">' . $model->remark . '</td>';
+                echo '  <td id="createtime_'. $model->game_id.'">' . $model->createtime . '</td>';
                 echo '  <td class="center">';
                 echo '      <a id="view_btn" onclick="viewAction(' . $model->game_id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-zoom-in icon-white"></i>查看</a>';
                 echo '      <a id="edit_btn" onclick="editAction(' . $model->game_id . ')" class="btn btn-primary btn-sm" href="#"> <i class="glyphicon glyphicon-edit icon-white"></i>修改</a>';
@@ -400,9 +400,14 @@ $('#game-form').bind('submit', function(e) {
         	}
         	else{
             	var json = value.data;
+                alert(json)
         		for(var key in json){
-        			$('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
-        			
+                    var tagname = key+"_"+json["game_id"];
+                    var tagvalue = json[key];
+                    //alert(tagname+":"+tagvalue);
+                    $('#' + tagname).html(tagvalue);
+        			//$('#' + key).attr({'data-placement':'bottom', 'data-content':json[key], 'data-toggle':'popover'}).addClass('popover-show').popover('show');
+
         		}
         	}
 

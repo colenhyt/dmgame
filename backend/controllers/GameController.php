@@ -125,7 +125,7 @@ class GameController extends BaseController
         
         
             if($model->validate() == true && $model->save()){
-                $msg = array('errno'=>0, 'msg'=>'保存成功');
+                $msg = array('errno'=>1, 'msg'=>'保存成功','data'=>json_encode($model->getAttributes()));
                 echo json_encode($msg);
             }
             else{
